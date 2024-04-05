@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - player
+id: player_delete_action
+label: 'Delete players'
+type: player
+plugin: entity:delete_action:player
+configuration: {  }

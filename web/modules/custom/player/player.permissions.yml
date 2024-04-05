@@ -1,0 +1,11 @@
+administer player:
+  title: 'Administer players'
+  restrict access: true
+view player:
+  title: 'View player'
+edit player:
+  title: 'Edit player'
+delete player:
+  title: 'Delete player'
+create player:
+  title: 'Create player'

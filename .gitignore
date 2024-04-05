@@ -1,3 +1,7 @@
+.idea/
+mutagen.yml.lock
+.vscode
+
 # gitignore template for Drupal 8 projects
 #
 # earlier versions of Drupal are tracked in `community/PHP/`
@@ -25,12 +29,14 @@
 /web/vendor
 /web/core
 /web/modules/README.txt
+/web/modules/contrib/*
 /web/profiles/README.txt
 /web/sites/development.services.yml
 /web/sites/example.settings.local.php
 /web/sites/example.sites.php
 /web/sites/README.txt
 /web/themes/README.txt
+/web/themes/contrib/*
 /web/.csslintrc
 /web/.editorconfig
 /web/.eslintignore
@@ -60,3 +66,9 @@
 /drush
 /drupal.phar
 /drupal
+
+# DDBB
+
+*.sql
+inazuma-bk-05-04-2024.sql
+/db/*
