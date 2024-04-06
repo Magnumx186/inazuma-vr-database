@@ -1,0 +1,5 @@
+passive.add_form:
+  title: 'Add passive'
+  route_name: entity.passive.add_form
+  appears_on:
+    - entity.passive.collection

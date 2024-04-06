@@ -1,0 +1,10 @@
+entity.passive.edit_form:
+  route_name: entity.passive.edit_form
+  group: passive
+  title: 'Edit'
+
+entity.passive.delete_form:
+  route_name: entity.passive.delete_form
+  group: passive
+  title: 'Delete'
+  weight: 10

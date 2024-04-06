@@ -1,0 +1,5 @@
+name: 'Passive'
+type: module
+description: 'Entidad que define y contiene la lógica de las pasivas de los personajes.'
+package: 'Inazuma victory road'
+core_version_requirement: ^10
