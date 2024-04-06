@@ -1,0 +1,13 @@
+uuid: 12144fa1-f599-4247-90a4-e8f2d80f36f9
+langcode: es
+status: true
+dependencies:
+  module:
+    - passive
+_core:
+  default_config_hash: IwwhpHZnuE-wFqUoix7yVqBHlQHKeB0dAMYDNPvx2XQ
+id: passive_save_action
+label: 'Save passives'
+type: passive
+plugin: 'entity:save_action:passive'
+configuration: {  }

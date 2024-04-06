@@ -1,0 +1,11 @@
+administer passive:
+  title: 'Administer passives'
+  restrict access: true
+view passive:
+  title: 'View passive'
+edit passive:
+  title: 'Edit passive'
+delete passive:
+  title: 'Delete passive'
+create passive:
+  title: 'Create passive'

@@ -1,0 +1,11 @@
+entity.passive.settings:
+  title: 'Passive'
+  description: 'Configure a Passive entity type.'
+  route_name:  entity.passive.settings
+  parent: system.admin_structure
+
+entity.passive.collection:
+  title: 'Passives'
+  description: 'List of passives.'
+  route_name: entity.passive.collection
+  parent: system.admin_content

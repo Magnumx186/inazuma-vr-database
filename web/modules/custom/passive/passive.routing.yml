@@ -1,0 +1,7 @@
+entity.passive.settings:
+  path: 'admin/structure/passive'
+  defaults:
+    _form: '\Drupal\passive\Form\PassiveSettingsForm'
+    _title: 'Passive'
+  requirements:
+    _permission: 'administer passive'

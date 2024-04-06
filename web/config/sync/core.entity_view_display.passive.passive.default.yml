@@ -1,0 +1,32 @@
+uuid: 5d8a6df4-9d2f-4034-8e86-4be271c4ada7
+langcode: es
+status: true
+dependencies:
+  module:
+    - passive
+    - text
+id: passive.passive.default
+targetEntityType: passive
+bundle: passive
+mode: default
+content:
+  description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  status: true
+  uid: true
