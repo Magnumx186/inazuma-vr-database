@@ -1,0 +1,8 @@
+uuid: 8614f7d9-3bdd-44a5-a7b2-7f4014c71735
+langcode: es
+status: true
+dependencies: {  }
+name: Afinidad
+vid: afinity
+description: 'Afinidad de un jugador o una supertécnica.'
+weight: 0

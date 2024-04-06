@@ -1,0 +1,11 @@
+uuid: 800d9b70-3f8a-4ef3-8176-28f466441796
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.afinity
+id: taxonomy_term.afinity
+target_entity_type_id: taxonomy_term
+target_bundle: afinity
+default_langcode: site_default
+language_alterable: false
