@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - skill
+id: skill_delete_action
+label: 'Delete habilidads'
+type: skill
+plugin: entity:delete_action:skill
+configuration: {  }

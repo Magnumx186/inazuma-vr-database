@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - skill
+id: skill_save_action
+label: 'Save habilidads'
+type: skill
+plugin: entity:save_action:skill
+configuration: {  }

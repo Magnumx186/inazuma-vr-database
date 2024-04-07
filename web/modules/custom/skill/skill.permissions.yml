@@ -1,0 +1,3 @@
+administer skill:
+  title: 'Administer habilidads'
+  restrict access: true

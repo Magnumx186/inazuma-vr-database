@@ -1,0 +1,22 @@
+entity.skill.settings:
+  title: 'Settings'
+  route_name: entity.skill.settings
+  base_route: entity.skill.settings
+entity.skill.view:
+  title: 'View'
+  route_name: entity.skill.canonical
+  base_route: entity.skill.canonical
+entity.skill.edit_form:
+  title: 'Edit'
+  route_name: entity.skill.edit_form
+  base_route: entity.skill.canonical
+entity.skill.delete_form:
+  title: 'Delete'
+  route_name: entity.skill.delete_form
+  base_route: entity.skill.canonical
+  weight: 10
+entity.skill.collection:
+  title: 'Habilidads'
+  route_name: entity.skill.collection
+  base_route: system.admin_content
+  weight: 10

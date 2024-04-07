@@ -1,0 +1,11 @@
+entity.skill.settings:
+  title: 'Habilidad'
+  description: 'Configure a Habilidad entity type.'
+  route_name:  entity.skill.settings
+  parent: system.admin_structure
+
+entity.skill.collection:
+  title: 'Habilidads'
+  description: 'List of habilidads.'
+  route_name: entity.skill.collection
+  parent: system.admin_content
