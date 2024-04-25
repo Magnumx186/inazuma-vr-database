@@ -85,7 +85,7 @@ final class skill extends ContentEntityBase implements skillInterface {
 
     $fields['label'] = BaseFieldDefinition::create('string')
       ->setTranslatable(TRUE)
-      ->setLabel(t('Label'))
+      ->setLabel(t('Nombre'))
       ->setRequired(TRUE)
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [
@@ -100,17 +100,32 @@ final class skill extends ContentEntityBase implements skillInterface {
       ])
       ->setDisplayConfigurable('view', TRUE);
 
-      $fields['afinity'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('The label of the field'))
-      ->setDescription(t('The description of the field.'))
+    $fields['description'] = BaseFieldDefinition::create('text_long')
+      ->setTranslatable(TRUE)
+      ->setLabel(t('Description'))
+      ->setDisplayOptions('form', [
+        'type' => 'text_textarea',
+        'weight' => 10,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', [
+        'type' => 'text_default',
+        'label' => 'above',
+        'weight' => 10,
+      ])
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['afinity'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Afinidad'))
+      ->setDescription(t('La afinidad de la habilidad.'))
       ->setRevisionable(TRUE)
       ->setSetting('target_type', 'taxonomy_term')
-      ->setSetting('handler', 'default')
+      ->setSetting('type', 'afinity')
       ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'hidden',
-        'type' => 'author',
-        'weight' => 0,
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => -3,
       ])
       ->setDisplayOptions('form', [
         'type' => 'entity_reference_autocomplete',
@@ -124,8 +139,33 @@ final class skill extends ContentEntityBase implements skillInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE)
-      ->setRequired(TRUE)
-      ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
+      ->setRequired(TRUE);
+
+    $fields['afinity'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Tipo de habilidad.'))
+      ->setDescription(t('Tipo habilidad.'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'taxonomy_term')
+      ->setSetting('type', 'tipo_de_habilidad')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => -3,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 5,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setRequired(TRUE);
 
     $fields['status'] = BaseFieldDefinition::create('boolean')
       ->setLabel(t('Status'))
@@ -149,19 +189,25 @@ final class skill extends ContentEntityBase implements skillInterface {
       ])
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['description'] = BaseFieldDefinition::create('text_long')
-      ->setTranslatable(TRUE)
-      ->setLabel(t('Description'))
+    $fields['image'] = BaseFieldDefinition::create('image')
+      ->setLabel(t('Image'))
+      ->setDescription(t('Imagen de la habilidad.'))
+      ->setRequired(FALSE)
+      ->setSettings([
+        'file_directory' => 'IMAGE_FOLDER',
+        'alt_field_required' => FALSE,
+        'file_extensions' => 'png jpg jpeg',
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'image',
+        'weight' => -4,
+      ])
       ->setDisplayOptions('form', [
-        'type' => 'text_textarea',
-        'weight' => 10,
+        'type' => 'image_image',
+        'weight' => -4,
       ])
       ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayOptions('view', [
-        'type' => 'text_default',
-        'label' => 'above',
-        'weight' => 10,
-      ])
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')

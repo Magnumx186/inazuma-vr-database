@@ -137,6 +137,29 @@ final class Player extends ContentEntityBase implements PlayerInterface {
         'weight' => 10,
       ])
       ->setDisplayConfigurable('view', TRUE);
+    
+    $fields['skills'] = BaseFieldDefinition::create('entity_reference')
+      ->setTranslatable(TRUE)
+      ->setLabel(t('Habilidades'))
+      ->setSetting('target_type', 'skill')
+      ->setRequired(FALSE)
+      ->setCardinality(6) // Limitado a 6 valores
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => 60,
+          'placeholder' => '',
+        ],
+        'weight' => 15,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => -4,
+      ))
+      ->setDisplayConfigurable('view', TRUE);
 
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
       ->setTranslatable(TRUE)
