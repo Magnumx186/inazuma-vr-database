@@ -1,0 +1,10 @@
+entity.skill.edit_form:
+  route_name: entity.skill.edit_form
+  group: skill
+  title: 'Edit'
+
+entity.skill.delete_form:
+  route_name: entity.skill.delete_form
+  group: skill
+  title: 'Delete'
+  weight: 10

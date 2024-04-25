@@ -1,0 +1,7 @@
+entity.skill.settings:
+  path: 'admin/structure/skill'
+  defaults:
+    _form: '\Drupal\skill\Form\skillSettingsForm'
+    _title: 'Habilidad'
+  requirements:
+    _permission: 'administer skill'

@@ -2,36 +2,35 @@
 
 declare(strict_types=1);
 
-namespace Drupal\player\Entity;
+namespace Drupal\skill\Entity;
 
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\player\PlayerInterface;
+use Drupal\skill\skillInterface;
 use Drupal\user\EntityOwnerTrait;
 
 /**
- * Defines the player entity class.
+ * Defines the habilidad entity class.
  *
  * @ContentEntityType(
- *   id = "player",
- *   label = @Translation("Player"),
- *   label_collection = @Translation("Players"),
- *   label_singular = @Translation("player"),
- *   label_plural = @Translation("players"),
+ *   id = "skill",
+ *   label = @Translation("Habilidad"),
+ *   label_collection = @Translation("Habilidad"),
+ *   label_singular = @Translation("habilidad"),
+ *   label_plural = @Translation("habilidad"),
  *   label_count = @PluralTranslation(
- *     singular = "@count players",
- *     plural = "@count players",
+ *     singular = "@count habilidad",
+ *     plural = "@count habilidades",
  *   ),
  *   handlers = {
- *     "list_builder" = "Drupal\player\PlayerListBuilder",
+ *     "list_builder" = "Drupal\skill\skillListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
- *     "access" = "Drupal\player\PlayerAccessControlHandler",
  *     "form" = {
- *       "add" = "Drupal\player\Form\PlayerForm",
- *       "edit" = "Drupal\player\Form\PlayerForm",
+ *       "add" = "Drupal\skill\Form\skillForm",
+ *       "edit" = "Drupal\skill\Form\skillForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
  *       "delete-multiple-confirm" = "Drupal\Core\Entity\Form\DeleteMultipleForm",
  *     },
@@ -39,10 +38,10 @@ use Drupal\user\EntityOwnerTrait;
  *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
  *     },
  *   },
- *   base_table = "player",
- *   data_table = "player_field_data",
+ *   base_table = "skill",
+ *   data_table = "skill_field_data",
  *   translatable = TRUE,
- *   admin_permission = "administer player",
+ *   admin_permission = "administer skill",
  *   entity_keys = {
  *     "id" = "id",
  *     "langcode" = "langcode",
@@ -51,17 +50,17 @@ use Drupal\user\EntityOwnerTrait;
  *     "owner" = "uid",
  *   },
  *   links = {
- *     "collection" = "/admin/content/player",
- *     "add-form" = "/player/add",
- *     "canonical" = "/player/{player}",
- *     "edit-form" = "/player/{player}/edit",
- *     "delete-form" = "/player/{player}/delete",
- *     "delete-multiple-form" = "/admin/content/player/delete-multiple",
+ *     "collection" = "/admin/content/skill",
+ *     "add-form" = "/habilidad/add",
+ *     "canonical" = "/habilidad/{skill}",
+ *     "edit-form" = "/habilidad/{skill}/edit",
+ *     "delete-form" = "/habilidad/{skill}/delete",
+ *     "delete-multiple-form" = "/admin/content/skill/delete-multiple",
  *   },
- *   field_ui_base_route = "entity.player.settings",
+ *   field_ui_base_route = "entity.skill.settings",
  * )
  */
-final class Player extends ContentEntityBase implements PlayerInterface {
+final class skill extends ContentEntityBase implements skillInterface {
 
   use EntityChangedTrait;
   use EntityOwnerTrait;
@@ -86,7 +85,7 @@ final class Player extends ContentEntityBase implements PlayerInterface {
 
     $fields['label'] = BaseFieldDefinition::create('string')
       ->setTranslatable(TRUE)
-      ->setLabel(t('Label'))
+      ->setLabel(t('Nombre'))
       ->setRequired(TRUE)
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [
@@ -100,6 +99,73 @@ final class Player extends ContentEntityBase implements PlayerInterface {
         'weight' => -5,
       ])
       ->setDisplayConfigurable('view', TRUE);
+
+    $fields['description'] = BaseFieldDefinition::create('text_long')
+      ->setTranslatable(TRUE)
+      ->setLabel(t('Description'))
+      ->setDisplayOptions('form', [
+        'type' => 'text_textarea',
+        'weight' => 10,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('view', [
+        'type' => 'text_default',
+        'label' => 'above',
+        'weight' => 10,
+      ])
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['afinity'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Afinidad'))
+      ->setDescription(t('La afinidad de la habilidad.'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'taxonomy_term')
+      ->setSetting('type', 'afinity')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => -3,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 5,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setRequired(TRUE);
+
+    $fields['afinity'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Tipo de habilidad.'))
+      ->setDescription(t('Tipo habilidad.'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'taxonomy_term')
+      ->setSetting('type', 'tipo_de_habilidad')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => -3,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 5,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setRequired(TRUE);
 
     $fields['status'] = BaseFieldDefinition::create('boolean')
       ->setLabel(t('Status'))
@@ -123,42 +189,25 @@ final class Player extends ContentEntityBase implements PlayerInterface {
       ])
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['description'] = BaseFieldDefinition::create('text_long')
-      ->setTranslatable(TRUE)
-      ->setLabel(t('Description'))
-      ->setDisplayOptions('form', [
-        'type' => 'text_textarea',
-        'weight' => 10,
-      ])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayOptions('view', [
-        'type' => 'text_default',
-        'label' => 'above',
-        'weight' => 10,
-      ])
-      ->setDisplayConfigurable('view', TRUE);
-    
-    $fields['skills'] = BaseFieldDefinition::create('entity_reference')
-      ->setTranslatable(TRUE)
-      ->setLabel(t('Habilidades'))
-      ->setSetting('target_type', 'skill')
+    $fields['image'] = BaseFieldDefinition::create('image')
+      ->setLabel(t('Image'))
+      ->setDescription(t('Imagen de la habilidad.'))
       ->setRequired(FALSE)
-      ->setCardinality(6) // Limitado a 6 valores
+      ->setSettings([
+        'file_directory' => 'IMAGE_FOLDER',
+        'alt_field_required' => FALSE,
+        'file_extensions' => 'png jpg jpeg',
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'image',
+        'weight' => -4,
+      ])
       ->setDisplayOptions('form', [
-        'type' => 'entity_reference_autocomplete',
-        'settings' => [
-          'match_operator' => 'CONTAINS',
-          'size' => 60,
-          'placeholder' => '',
-        ],
-        'weight' => 15,
+        'type' => 'image_image',
+        'weight' => -4,
       ])
       ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayOptions('view', array(
-        'label' => 'above',
-        'type' => 'entity_reference_label',
-        'weight' => -4,
-      ))
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
@@ -186,7 +235,7 @@ final class Player extends ContentEntityBase implements PlayerInterface {
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Authored on'))
       ->setTranslatable(TRUE)
-      ->setDescription(t('The time that the player was created.'))
+      ->setDescription(t('The time that the habilidad was created.'))
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'timestamp',
@@ -202,7 +251,7 @@ final class Player extends ContentEntityBase implements PlayerInterface {
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setTranslatable(TRUE)
-      ->setDescription(t('The time that the player was last edited.'));
+      ->setDescription(t('The time that the habilidad was last edited.'));
 
     return $fields;
   }

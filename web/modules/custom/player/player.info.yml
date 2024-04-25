@@ -1,5 +1,8 @@
 name: 'Player'
 type: module
-description: '@todo Add description.'
-package: '@todo Add package'
+description: 'Gestiona la entidad jugador.'
+package: 'Inazuma victory road'
 core_version_requirement: ^10
+dependencies:
+ - skill
+ - passive

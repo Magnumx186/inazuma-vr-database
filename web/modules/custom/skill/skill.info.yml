@@ -1,0 +1,5 @@
+name: 'Skill'
+type: module
+description: 'Gestiona la entidad habilidad.'
+package: 'Inazuma victory road'
+core_version_requirement: ^10

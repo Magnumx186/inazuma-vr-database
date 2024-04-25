@@ -1,0 +1,11 @@
+uuid: 9ab9aa8e-66a0-4e96-9812-c4accc55260a
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.tipo_de_habilidad
+id: taxonomy_term.tipo_de_habilidad
+target_entity_type_id: taxonomy_term
+target_bundle: tipo_de_habilidad
+default_langcode: site_default
+language_alterable: false

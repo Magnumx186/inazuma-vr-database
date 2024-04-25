@@ -1,0 +1,8 @@
+uuid: 4c959d9b-dfed-4f7a-9c79-96f69baca978
+langcode: es
+status: true
+dependencies: {  }
+name: 'Tipo de habilidad.'
+vid: tipo_de_habilidad
+description: 'Los tipos de las técnicas de los personales.'
+weight: 0

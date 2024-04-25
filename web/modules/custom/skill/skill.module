@@ -1,0 +1,85 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @file
+ * Provides a habilidad entity type.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function skill_theme(): array {
+  return [
+    'skill' => ['render element' => 'elements'],
+  ];
+}
+
+/**
+ * Prepares variables for habilidad templates.
+ *
+ * Default template: skill.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the habilidad information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_skill(array &$variables): void {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function skill_user_cancel($edit, UserInterface $account, $method): void {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish habilidads.
+      $storage = \Drupal::entityTypeManager()->getStorage('skill');
+      $skill_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($skill_ids) as $skill) {
+        $skill->set('status', FALSE)->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize habilidads.
+      $storage = \Drupal::entityTypeManager()->getStorage('skill');
+      $skill_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($skill_ids) as $skill) {
+        $skill->setOwnerId(0)->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function skill_user_predelete(UserInterface $account): void {
+  // Delete habilidads that belong to this account.
+  $storage = \Drupal::entityTypeManager()->getStorage('skill');
+  $skill_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->accessCheck(FALSE)
+    ->execute();
+  $storage->delete(
+    $storage->loadMultiple($skill_ids)
+  );
+}
